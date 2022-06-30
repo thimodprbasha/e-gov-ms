@@ -17,14 +17,15 @@ import (
 )
 
 func InitializeDB() {
+	Logger.Log.Infof("Verion0.2")
 	connectionNode()
 	CreateRoles()
 }
 
-func CreateRoles()  {
-	createAdmin("adminiuser@admin.com" , "admin123" , env.ADMIN)
-	createAdmin("supervisoriuser@admin.com" , "user123" , env.SUPERVISOR)
-	createAdmin("govuser@admin.com" , "user123" , env.GOV_WORKER)
+func CreateRoles() {
+	createAdmin("adminiuser@admin.com", "admin123", env.ADMIN)
+	createAdmin("supervisoriuser@admin.com", "user123", env.SUPERVISOR)
+	createAdmin("govuser@admin.com", "user123", env.GOV_WORKER)
 }
 
 func connectionNode() {
@@ -49,7 +50,7 @@ func connectionNode() {
 
 }
 
-func createAdmin(email , password , role string  ) {
+func createAdmin(email, password, role string) {
 	db := env.MDB
 
 	user := model.User{}

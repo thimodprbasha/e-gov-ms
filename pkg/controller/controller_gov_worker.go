@@ -7,7 +7,7 @@ import (
 )
 
 func approve(c echo.Context) error {
-	 err := gov_worker.ApproveComplain(c)
+	err := gov_worker.ApproveComplain(c)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	} else {
@@ -16,7 +16,7 @@ func approve(c echo.Context) error {
 }
 
 func getComplains(c echo.Context) error {
-	result , err := gov_worker.Complains(c)
+	result, err := gov_worker.Complains(c)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	} else {
@@ -25,7 +25,7 @@ func getComplains(c echo.Context) error {
 }
 
 func getComplain(c echo.Context) error {
-	result , err := gov_worker.Complain(c)
+	result, err := gov_worker.Complain(c)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err.Error())
 	} else {
@@ -42,15 +42,21 @@ func shareComplains(c echo.Context) error {
 	}
 }
 
+func generateReport(c echo.Context) error {
+	result, err := gov_worker.GenerateReport(c)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, err.Error())
+	} else {
+		return c.JSON(http.StatusOK, result)
+	}
+}
+
 func GovWorkerController(g *echo.Group) {
 	g.POST("api/user/gov/approve", approve)
 	g.POST("api/user/gov/share_complain", shareComplains)
 
 	g.GET("api/user/gov/complains", getComplains)
 	g.GET("api/user/gov/complain/:id", getComplain)
-
+	g.GET("api/user/gov/generate_report", generateReport)
 
 }
-
-
-

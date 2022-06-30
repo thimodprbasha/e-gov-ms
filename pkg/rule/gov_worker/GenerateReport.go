@@ -8,7 +8,7 @@ import (
 	"service/pkg/model"
 )
 
-func GenerateReport()(interface{} , error){
+func GenerateReport() (interface{}, error) {
 	db := env.MDB
 	var complains []*model.Complain
 	var resolvedComplains []*model.Complain
@@ -30,22 +30,22 @@ func GenerateReport()(interface{} , error){
 		}
 	}
 
-	for _ , complain := range complains{
+	for _, complain := range complains {
 		if complain.ComplainFeedback.FeedbackApproved == true {
-			resolvedComplains = append( resolvedComplains , complain)
-		}else {
-			unResovedcomplains = append( unResovedcomplains , complain)
+			resolvedComplains = append(resolvedComplains, complain)
+		} else {
+			unResovedcomplains = append(unResovedcomplains, complain)
 		}
 
 	}
 
 	response := map[string]interface{}{
-		"complains" : complains,
-		"num_of_complains" : len(complains),
-		"resolved_complains" : resolvedComplains,
-		"num_of_resolved_complains" : len(resolvedComplains),
-		"unresolved_complains" : unResovedcomplains,
-		"num_of_unresolved_complains" : len(unResovedcomplains),
+		//"complains" : complains,
+		"num_of_complains": len(complains),
+		//"resolved_complains" : resolvedComplains,
+		"num_of_resolved_complains": len(resolvedComplains),
+		//"unresolved_complains" : unResovedcomplains,
+		"num_of_unresolved_complains": len(unResovedcomplains),
 	}
 
 	return response, nil
